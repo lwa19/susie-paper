@@ -2,3 +2,8 @@
 **/.sos
 **/.ipynb_checkpoints
 **/__pycache__
+
+# LW:
+**/.err
+**/.out
+output/*

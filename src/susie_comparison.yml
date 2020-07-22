@@ -1,16 +1,16 @@
 DSC:
   midway2:
     description: UChicago RCC cluster Midway 2
-    address: gaow@midway2.rcc.uchicago.edu
+    address: lwang19@midway2.rcc.uchicago.edu
     paths:
-      home: /home/gaow
+      home: /home/lwang19
     queue_type: pbs
     status_check_interval: 60
     max_running_jobs: 50
     max_cores: 40
     max_walltime: "36:00:00"
     max_mem: 64G
-    job_template: |
+    task_template: |
       #!/bin/bash
       #SBATCH --time={walltime}
       #{partition}
@@ -23,6 +23,7 @@ DSC:
       #SBATCH --error={job_name}.err
       cd {cur_dir}
       module load R/3.5.1
+      source ~/activate_anaconda.sh
     partition: "SBATCH --partition=broadwl"
     account: ""
     submit_cmd: sbatch {job_file}
@@ -44,8 +45,10 @@ default:
   queue: midway2_head
   time_per_instance: 10m
   instances_per_job: 10
-  n_cpu: 1
-  mem_per_cpu: 2G
+  # n_cpu: 1
+  # mem_per_cpu: 2G
+  cpus_per_instance: 1
+  mem_per_instance: 2G
 
 liter_data:
   time_per_instance: 3m
@@ -74,7 +77,7 @@ plot_dap:
   time_per_instance: 3m
 
 fit_caviar:
-  n_cpu: 2
+  # n_cpu: 2
   instances_per_job: 1
   time_per_instance: 4h
 
